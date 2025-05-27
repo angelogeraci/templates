@@ -1,0 +1,944 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Weekly Routine Campaign</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Beautiful pastel color palette */
+            --primary-blue: #A5B4FC;
+            --secondary-blue: #C7D2FE;
+            --light-blue: #F0F4FF;
+            --accent-teal: #7DD3FC;
+            --warm-orange: #FED7AA;
+            --success-green: #86EFAC;
+            --error-red: #FCA5A5;
+            --purple-accent: #D8B4FE;
+            --soft-purple: #E9D5FF;
+            
+            /* Soft neutral pastels */
+            --white: #FFFFFF;
+            --gray-50: #FAFBFC;
+            --gray-100: #F7F8FA;
+            --gray-200: #F1F3F6;
+            --gray-300: #E4E8ED;
+            --gray-400: #D1D7E0;
+            --gray-500: #A8B2C1;
+            --gray-600: #8B95A5;
+            --gray-700: #6B7684;
+            --gray-800: #4A5568;
+            --gray-900: #2D3748;
+            
+            /* Soft pastel accent colors */
+            --soft-pink: #FBCFE8;
+            --soft-yellow: #FEF3C7;
+            --soft-emerald: #A7F3D0;
+            --soft-indigo: #C7D2FE;
+            --soft-rose: #FECACA;
+            --soft-mint: #CCFBF1;
+            --soft-lavender: #F3E8FF;
+            
+            /* Real platform colors for active states */
+            --instagram-real: #E4405F;
+            --tiktok-real: #000000;
+            --linkedin-real: #0077B5;
+            --facebook-real: #1877F2;
+            --twitter-real: #1DA1F2;
+            --youtube-real: #FF0000;
+            --pinterest-real: #BD081C;
+            
+            /* Spacing remains the same */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 0.75rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            
+            /* Border radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            
+            /* Softer shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-700);
+            background: linear-gradient(135deg, var(--soft-lavender) 0%, var(--light-blue) 30%, var(--soft-mint) 70%, var(--soft-yellow) 100%);
+            min-height: 100vh;
+            padding: var(--spacing-lg);
+            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            border: 1px solid var(--gray-100);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--soft-purple) 50%, var(--accent-teal) 100%);
+            color: var(--gray-800);
+            padding: var(--spacing-2xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.08"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.08"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.12"/><circle cx="20" cy="60" r="0.5" fill="white" opacity="0.12"/><circle cx="80" cy="40" r="0.5" fill="white" opacity="0.12"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .campaign-title {
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            letter-spacing: -0.025em;
+        }
+
+        .campaign-subject {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            font-weight: 400;
+            margin-bottom: var(--spacing-xl);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .campaign-info {
+            padding: var(--spacing-2xl);
+            background: var(--gray-50);
+        }
+
+        .info-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .info-title {
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: var(--spacing-md);
+            border-left: 4px solid var(--primary-blue);
+            padding-left: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .info-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+        }
+
+        .info-content {
+            font-size: 1.125rem;
+            line-height: 1.75;
+            color: var(--gray-700);
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+        }
+
+        .filters {
+            padding: var(--spacing-xl) var(--spacing-2xl);
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .filter-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-lg);
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .filter-title::before {
+            content: '🔍';
+            font-size: 1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .filter-btn {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+            font-size: 0.875rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .filter-btn:hover::before {
+            left: 100%;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .filter-btn.active {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+            opacity: 1;
+        }
+
+        /* Platform-specific button colors - Light centers with real color borders when inactive */
+        .filter-btn[data-platform="all"] {
+            background: var(--light-blue);
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .filter-btn[data-platform="all"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(165, 180, 252, 0.3);
+        }
+
+        .filter-btn[data-platform="all"].active {
+            background: var(--primary-blue);
+            color: var(--white);
+            border-color: var(--primary-blue);
+        }
+
+        .filter-btn[data-platform="instagram"] {
+            background: #FCE7F3;
+            border: 2px solid var(--instagram-real);
+            color: var(--instagram-real);
+        }
+
+        .filter-btn[data-platform="instagram"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(228, 64, 95, 0.2);
+        }
+
+        .filter-btn[data-platform="instagram"].active {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            color: var(--white);
+            border-color: var(--instagram-real);
+        }
+
+        .filter-btn[data-platform="tiktok"] {
+            background: #F9FAFB;
+            border: 2px solid var(--tiktok-real);
+            color: var(--tiktok-real);
+        }
+
+        .filter-btn[data-platform="tiktok"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-btn[data-platform="tiktok"].active {
+            background: var(--tiktok-real);
+            color: var(--white);
+            border-color: var(--tiktok-real);
+        }
+
+        .filter-btn[data-platform="linkedin"] {
+            background: #EBF8FF;
+            border: 2px solid var(--linkedin-real);
+            color: var(--linkedin-real);
+        }
+
+        .filter-btn[data-platform="linkedin"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 119, 181, 0.2);
+        }
+
+        .filter-btn[data-platform="linkedin"].active {
+            background: var(--linkedin-real);
+            color: var(--white);
+            border-color: var(--linkedin-real);
+        }
+
+        .filter-btn[data-platform="facebook"] {
+            background: #EBF8FF;
+            border: 2px solid var(--facebook-real);
+            color: var(--facebook-real);
+        }
+
+        .filter-btn[data-platform="facebook"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(24, 119, 242, 0.2);
+        }
+
+        .filter-btn[data-platform="facebook"].active {
+            background: var(--facebook-real);
+            color: var(--white);
+            border-color: var(--facebook-real);
+        }
+
+        .filter-btn[data-platform="twitter"] {
+            background: #EBF8FF;
+            border: 2px solid var(--twitter-real);
+            color: var(--twitter-real);
+        }
+
+        .filter-btn[data-platform="twitter"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(29, 161, 242, 0.2);
+        }
+
+        .filter-btn[data-platform="twitter"].active {
+            background: var(--twitter-real);
+            color: var(--white);
+            border-color: var(--twitter-real);
+        }
+
+        .filter-btn[data-platform="youtube"] {
+            background: #FEF2F2;
+            border: 2px solid var(--youtube-real);
+            color: var(--youtube-real);
+        }
+
+        .filter-btn[data-platform="youtube"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.2);
+        }
+
+        .filter-btn[data-platform="youtube"].active {
+            background: var(--youtube-real);
+            color: var(--white);
+            border-color: var(--youtube-real);
+        }
+
+        .filter-btn[data-platform="pinterest"] {
+            background: #FEF2F2;
+            border: 2px solid var(--pinterest-real);
+            color: var(--pinterest-real);
+        }
+
+        .filter-btn[data-platform="pinterest"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(189, 8, 28, 0.2);
+        }
+
+        .filter-btn[data-platform="pinterest"].active {
+            background: var(--pinterest-real);
+            color: var(--white);
+            border-color: var(--pinterest-real);
+        }
+
+        .calendar {
+            padding: var(--spacing-2xl);
+        }
+
+        .day-container {
+            margin-bottom: var(--spacing-2xl);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .day-container:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--soft-indigo) 50%, var(--accent-teal) 100%);
+            color: var(--gray-800);
+            padding: var(--spacing-xl) var(--spacing-2xl);
+            position: relative;
+        }
+
+        .day-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--warm-orange), var(--soft-emerald), var(--soft-pink), var(--soft-yellow));
+        }
+
+        .day-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xs);
+            letter-spacing: -0.025em;
+        }
+
+        .day-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            font-weight: 500;
+            margin-bottom: var(--spacing-sm);
+            color: var(--gray-700);
+        }
+
+        .day-theme {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .posts-container {
+            padding: var(--spacing-xl);
+        }
+
+        .post-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            border-left: 4px solid var(--primary-blue);
+            transition: all 0.2s ease;
+            border: 1px solid var(--gray-200);
+        }
+
+        .post-card:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+            border-left-color: var(--accent-teal);
+        }
+
+        .post-card.hidden {
+            display: none;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .platform-badge {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .platform-badge.instagram { 
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+        }
+        .platform-badge.tiktok { 
+            background: linear-gradient(45deg, #000000 0%, #333333 100%); 
+        }
+        .platform-badge.linkedin { 
+            background: linear-gradient(45deg, #0077b5 0%, #005885 100%); 
+        }
+        .platform-badge.facebook { 
+            background: linear-gradient(45deg, #1877f2 0%, #1565c0 100%); 
+        }
+        .platform-badge.twitter { 
+            background: linear-gradient(45deg, #1da1f2 0%, #1976d2 100%); 
+        }
+        .platform-badge.youtube { 
+            background: linear-gradient(45deg, #ff0000 0%, #cc0000 100%); 
+        }
+        .platform-badge.pinterest { 
+            background: linear-gradient(45deg, #bd081c 0%, #8b0000 100%); 
+        }
+
+        .content-type {
+            background: var(--white);
+            color: var(--gray-700);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 2px solid var(--gray-200);
+        }
+
+        .post-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .detail-item {
+            background: var(--white);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--gray-200);
+            transition: border-color 0.2s ease;
+        }
+
+        .detail-item:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--accent-teal);
+            font-size: 0.75rem;
+            margin-bottom: var(--spacing-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .detail-value {
+            color: var(--gray-700);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .action-section {
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--gray-200);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+        }
+
+        .action-section::before {
+            content: '💡';
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            font-size: 1.25rem;
+            opacity: 0.6;
+        }
+
+        .action-title {
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.125rem;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .action-title::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--soft-rose);
+            border-radius: 50%;
+        }
+
+        .action-content {
+            color: var(--gray-700);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .insights-section {
+            background: linear-gradient(135deg, var(--gray-50) 0%, #F0FDF4 5%);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            border-left: 4px solid #BBF7D0;
+            border: 1px solid var(--gray-200);
+        }
+
+        .insights-title {
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: var(--spacing-md);
+            font-size: 1.125rem;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .insights-title::before {
+            content: '📊';
+            font-size: 1rem;
+        }
+
+        .insight-item {
+            margin-bottom: var(--spacing-md);
+            padding: var(--spacing-md);
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid #BBF7D0;
+            border: 1px solid var(--gray-100);
+            transition: transform 0.2s ease;
+        }
+
+        .insight-item:hover {
+            transform: translateX(2px);
+        }
+
+        .insight-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .insight-label {
+            font-weight: 600;
+            color: var(--gray-700);
+            font-size: 0.875rem;
+            margin-bottom: var(--spacing-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .insight-label::before {
+            content: '▸';
+            color: #BBF7D0;
+            font-size: 0.75rem;
+        }
+
+        .insight-text {
+            color: var(--gray-700);
+            line-height: 1.5;
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: var(--spacing-md);
+            }
+            
+            .campaign-title {
+                font-size: 2rem;
+            }
+            
+            .campaign-subject {
+                font-size: 1.125rem;
+            }
+            
+            .day-title {
+                font-size: 1.5rem;
+            }
+            
+            .post-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                justify-content: center;
+            }
+            
+            .post-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-sm);
+            }
+            
+            .campaign-info, .filters, .calendar {
+                padding: var(--spacing-lg);
+            }
+        }
+
+        /* Smooth animations */
+        * {
+            transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        /* Focus states for accessibility */
+        .filter-btn:focus,
+        .detail-item:focus,
+        .post-card:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+
+        /* Loading animation */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .loading {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-content">
+                <h1 class="campaign-title">[Campaign Title]</h1>
+                <p class="campaign-subject">[Campaign Subject]</p>
+            </div>
+        </div>
+
+        <!-- Campaign Information -->
+        <div class="campaign-info">
+            <div class="info-section">
+                <h3 class="info-title">Target Audience</h3>
+                <div class="info-content">[Target audience description combining psychographic and demographic characteristics]</div>
+            </div>
+            <div class="info-section">
+                <h3 class="info-title">Campaign Objective</h3>
+                <div class="info-content">[Strategic communication goal and desired outcomes]</div>
+            </div>
+        </div>
+
+        <!-- Platform Filters -->
+        <div class="filters">
+            <h3 class="filter-title">Filter by Platform</h3>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-platform="all">All Platforms</button>
+                <button class="filter-btn" data-platform="instagram">Instagram</button>
+                <button class="filter-btn" data-platform="tiktok">TikTok</button>
+                <button class="filter-btn" data-platform="linkedin">LinkedIn</button>
+                <button class="filter-btn" data-platform="facebook">Facebook</button>
+                <button class="filter-btn" data-platform="twitter">Twitter</button>
+                <button class="filter-btn" data-platform="youtube">YouTube</button>
+                <button class="filter-btn" data-platform="pinterest">Pinterest</button>
+            </div>
+        </div>
+
+        <!-- Weekly Calendar -->
+        <div class="calendar">
+            <!-- Monday -->
+            <div class="day-container">
+                <div class="day-header">
+                    <h2 class="day-title">Monday</h2>
+                    <h3 class="day-subtitle">[Daily Theme Name]</h3>
+                    <p class="day-theme">[Brief explanation of daily focus]</p>
+                </div>
+                <div class="posts-container">
+                    <!-- Sample Post Card -->
+                    <div class="post-card" data-platform="instagram">
+                        <div class="post-header">
+                            <span class="platform-badge instagram">📸 Instagram</span>
+                            <span class="content-type">Reel</span>
+                        </div>
+                        <div class="post-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Posting Time</div>
+                                <div class="detail-value">11:30 AM</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Focus</div>
+                                <div class="detail-value">[Clusters and Personality traits]</div>
+                            </div>
+                        </div>
+                        <div class="action-section">
+                            <div class="action-title">Content Action</div>
+                            <div class="action-content">[Specific content idea description]</div>
+                        </div>
+                        <div class="insights-section">
+                            <div class="insights-title">Strategic Insights</div>
+                            <div class="insight-item">
+                                <div class="insight-label">Cluster Alignment</div>
+                                <div class="insight-text">[Why this works for selected clusters]</div>
+                            </div>
+                            <div class="insight-item">
+                                <div class="insight-label">Personality Relevance</div>
+                                <div class="insight-text">[Why personality trait is relevant]</div>
+                            </div>
+                            <div class="insight-item">
+                                <div class="insight-label">Brand Positioning</div>
+                                <div class="insight-text">[How it aligns with brand goals]</div>
+                            </div>
+                            <div class="insight-item">
+                                <div class="insight-label">Platform Optimization</div>
+                                <div class="insight-text">[How platform/format maximizes engagement]</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Additional post cards would be added here for each platform -->
+                </div>
+            </div>
+
+            <!-- Tuesday through Sunday would follow the same structure -->
+            <div class="day-container">
+                <div class="day-header">
+                    <h2 class="day-title">Tuesday</h2>
+                    <h3 class="day-subtitle">[Daily Theme Name]</h3>
+                    <p class="day-theme">[Brief explanation of daily focus]</p>
+                </div>
+                <div class="posts-container">
+                    <!-- Post cards for Tuesday -->
+                </div>
+            </div>
+
+            <div class="day-container">
+                <div class="day-header">
+                    <h2 class="day-title">Wednesday</h2>
+                    <h3 class="day-subtitle">[Daily Theme Name]</h3>
+                    <p class="day-theme">[Brief explanation of daily focus]</p>
+                </div>
+                <div class="posts-container">
+                    <!-- Post cards for Wednesday -->
+                </div>
+            </div>
+
+            <div class="day-container">
+                <div class="day-header">
+                    <h2 class="day-title">Thursday</h2>
+                    <h3 class="day-subtitle">[Daily Theme Name]</h3>
+                    <p class="day-theme">[Brief explanation of daily focus]</p>
+                </div>
+                <div class="posts-container">
+                    <!-- Post cards for Thursday -->
+                </div>
+            </div>
+
+            <div class="day-container">
+                <div class="day-header">
+                    <h2 class="day-title">Friday</h2>
+                    <h3 class="day-subtitle">[Daily Theme Name]</h3>
+                    <p class="day-theme">[Brief explanation of daily focus]</p>
+                </div>
+                <div class="posts-container">
+                    <!-- Post cards for Friday -->
+                </div>
+            </div>
+
+            <div class="day-container">
+                <div class="day-header">
+                    <h2 class="day-title">Saturday</h2>
+                    <h3 class="day-subtitle">[Daily Theme Name]</h3>
+                    <p class="day-theme">[Brief explanation of daily focus]</p>
+                </div>
+                <div class="posts-container">
+                    <!-- Post cards for Saturday -->
+                </div>
+            </div>
+
+            <div class="day-container">
+                <div class="day-header">
+                    <h2 class="day-title">Sunday</h2>
+                    <h3 class="day-subtitle">[Daily Theme Name]</h3>
+                    <p class="day-theme">[Brief explanation of daily focus]</p>
+                </div>
+                <div class="posts-container">
+                    <!-- Post cards for Sunday -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Filter functionality with enhanced animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const postCards = document.querySelectorAll('.post-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    const selectedPlatform = this.getAttribute('data-platform');
+
+                    // Add subtle loading animation
+                    postCards.forEach(card => card.classList.add('loading'));
+
+                    setTimeout(() => {
+                        postCards.forEach(card => {
+                            card.classList.remove('loading');
+                            if (selectedPlatform === 'all' || card.getAttribute('data-platform') === selectedPlatform) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        });
+                    }, 150);
+                });
+            });
+
+            // Add intersection observer for smooth scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all day containers
+            document.querySelectorAll('.day-container').forEach(container => {
+                container.style.transform = 'translateY(20px)';
+                container.style.opacity = '0';
+                container.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
+                observer.observe(container);
+            });
+        });
+    </script>
+</body>
+</html>
+cwr_campaign_template.html
+Displaying cwr_campaign_template.html.
