@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine Europe - Campagnes Marketing Stratégiques</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .carousel-container {
+            width: 100%;
+            max-width: 1000px;
+            background-color: #f3f4f6;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1f2937, #374151);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #d1d5db;
+            font-size: 16px;
+        }
+
+        .carousel-content {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .slides-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .campaign-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            height: 100%;
+            width: 100%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .campaign-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .campaign-icon {
+            width: 48px;
+            height: 48px;
+            background-color: #ff964f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .campaign-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .campaign-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff964f;
+        }
+
+        .section {
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        .section h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+
+        .section p {
+            color: #6b7280;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .content-list {
+            list-style: none;
+        }
+
+        .content-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .content-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: #ff964f;
+            border-radius: 50%;
+            margin-right: 12px;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .content-list li span {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .nav-button:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .nav-button.prev {
+            left: 20px;
+        }
+
+        .nav-button.next {
+            right: 20px;
+        }
+
+        .nav-button svg {
+            width: 24px;
+            height: 24px;
+            stroke: #374151;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 30px;
+            background-color: #f9fafb;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #d1d5db;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .indicator.active {
+            background-color: #ff964f;
+            transform: scale(1.2);
+        }
+
+        .indicator:hover:not(.active) {
+            transform: scale(1.1);
+        }
+
+        .footer {
+            background-color: #1f2937;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                margin: 10px;
+            }
+            
+            .slide {
+                padding: 15px;
+            }
+            
+            .campaign-card {
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+                line-height: 1.3;
+            }
+            
+            .header p {
+                font-size: 14px;
+            }
+            
+            .campaign-title {
+                font-size: 18px;
+            }
+            
+            .carousel-content {
+                height: 500px;
+            }
+            
+            .section h3 {
+                font-size: 15px;
+            }
+            
+            .section p, .content-list li span {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Alpine Europe - Idées de Campagnes Marketing Stratégiques</h1>
+            <p>Campagnes Inspirantes Basées sur les Données pour l'Excellence Automobile Premium</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="carousel-content">
+            <div class="slides-container" id="slidesContainer">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <div class="campaign-card">
+                        <div class="campaign-header">
+                            <div class="campaign-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                    <path d="M4 22h16"></path>
+                                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="campaign-title">Légendes de Course Pilotent l'Innovation</h2>
+                        </div>
+
+                        <div class="section">
+                            <h3>Pourquoi ?</h3>
+                            <p>L'audience Alpine Europe est principalement composée de Fanatiques de Voitures qui démontrent une forte affinité pour les légendes de Formule 1 comme Lewis Hamilton, Max Verstappen et Fernando Alonso. Ces individus s'identifient significativement comme des Battants, ce qui en fait des cibles idéales pour un messaging axé sur la performance. La combinaison de passion automobile avec un état d'esprit orienté réussite crée une fondation puissante pour un positionnement de marque premium.</p>
+                        </div>
+
+                        <div class="section">
+                            <h3>Contenu Inspirant :</h3>
+                            <ul class="content-list">
+                                <li><span>Partenariat avec les champions F1 pour présenter l'héritage course d'Alpine via du contenu exclusif en coulisses</span></li>
+                                <li><span>Créer des expériences de conduite basées sur la réussite où les clients peuvent tester les véhicules Alpine sur circuits professionnels</span></li>
+                                <li><span>Lancer une série 'Héritage Course' mettant en vedette de vraies histoires clients de réussite personnelle et possession Alpine</span></li>
+                                <li><span>Développer des expériences digitales gamifiées qui récompensent les connaissances automobiles et compétences de conduite avec des privilèges de marque Alpine</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="section">
+                            <h3>Impact & Objectif :</h3>
+                            <p>Établit Alpine comme le choix ultime pour les passionnés de performance qui voient leur véhicule comme une extension de leurs réussites personnelles, favorisant un positionnement premium et la fidélité de marque parmi les clients automobiles de haute valeur.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <div class="campaign-card">
+                        <div class="campaign-header">
+                            <div class="campaign-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"></polygon>
+                                </svg>
+                            </div>
+                            <h2 class="campaign-title">Révolution Automobile Tech-Forward</h2>
+                        </div>
+
+                        <div class="section">
+                            <h3>Pourquoi ?</h3>
+                            <p>Le segment Amoureux d'Innovation High-Tech montre un enthousiasme remarquable pour la technologie automobile de pointe, particulièrement des marques comme Tesla Motors et les modèles innovants BMW. Combiné avec leurs traits de personnalité de Croyants en Légendes Urbaines, cette audience recherche des expériences extraordinaires qui défient la pensée conventionnelle. Ils sont attirés par des technologies révolutionnaires qui semblent presque mythiques dans leurs capacités.</p>
+                        </div>
+
+                        <div class="section">
+                            <h3>Contenu Inspirant :</h3>
+                            <ul class="content-list">
+                                <li><span>Présenter l'ingénierie avancée d'Alpine via des expériences AR immersives qui révèlent les innovations technologiques cachées</span></li>
+                                <li><span>Créer une campagne 'Mythes Futurs' mettant en avant des réalisations automobiles apparemment impossibles rendues réelles par la technologie Alpine</span></li>
+                                <li><span>Partenariat avec des influenceurs tech pour démontrer comment les véhicules Alpine s'intègrent aux écosystèmes digitaux de nouvelle génération</span></li>
+                                <li><span>Développer des avant-premières exclusives de technologies concept qui positionnent Alpine à l'avant-garde de l'évolution automobile</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="section">
+                            <h3>Impact & Objectif :</h3>
+                            <p>Positionne Alpine comme une marque visionnaire qui transforme les rêves automobiles en réalité, attirant des clients tech-savvy qui valorisent l'innovation et sont prêts à investir dans des expériences automobiles révolutionnaires.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <div class="campaign-card">
+                        <div class="campaign-header">
+                            <div class="campaign-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="campaign-title">Mouvement Performance Consciente</h2>
+                        </div>
+
+                        <div class="section">
+                            <h3>Pourquoi ?</h3>
+                            <p>Le segment Éco-Réfractaire représente une portion significative de l'audience Alpine qui, paradoxalement, s'identifie aussi comme Penseurs Libres. Cela crée une opportunité unique d'aborder les préoccupations environnementales via une prise de décision indépendante et rationnelle plutôt que par un messaging écologique conventionnel. Ces individus valorisent les solutions authentiques plutôt que les tendances populaires.</p>
+                        </div>
+
+                        <div class="section">
+                            <h3>Contenu Inspirant :</h3>
+                            <ul class="content-list">
+                                <li><span>Développer un messaging 'Performance Intelligente' qui souligne comment Alpine optimise la puissance tout en minimisant l'impact environnemental grâce à l'excellence d'ingénierie</span></li>
+                                <li><span>Créer du contenu de leadership d'opinion explorant des approches innovantes à la performance durable qui défient les conventions industrielles</span></li>
+                                <li><span>Lancer des forums exclusifs où les passionnés automobiles Penseurs Libres peuvent discuter d'approches rationnelles à la conduite performance responsable</span></li>
+                                <li><span>Partenariat avec des journalistes automobiles indépendants pour fournir une analyse impartiale de l'innovation environnementale d'Alpine sans greenwashing typique</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="section">
+                            <h3>Impact & Objectif :</h3>
+                            <p>Différencie Alpine en séduisant les penseurs rationnels et indépendants qui veulent des véhicules de performance alignés avec une considération environnementale réfléchie, créant une nouvelle catégorie d'enthousiastes de performance consciente.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4 -->
+                <div class="slide">
+                    <div class="campaign-card">
+                        <div class="campaign-header">
+                            <div class="campaign-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"></polygon>
+                                </svg>
+                            </div>
+                            <h2 class="campaign-title">Success Stories Investissement Immobilier</h2>
+                        </div>
+
+                        <div class="section">
+                            <h3>Pourquoi ?</h3>
+                            <p>Les Investisseurs Immobiliers dans l'audience Alpine démontrent une prise de décision financière sophistiquée et possèdent typiquement le trait de personnalité Calculateur. Ils approchent les achats majeurs avec une précision analytique et recherchent des investissements qui délivrent satisfaction personnelle et valeur à long terme. Leur approche méthodique à la création de richesse en fait des candidats idéaux pour les investissements automobiles premium.</p>
+                        </div>
+
+                        <div class="section">
+                            <h3>Contenu Inspirant :</h3>
+                            <ul class="content-list">
+                                <li><span>Créer des analyses ROI détaillées montrant la rétention de valeur d'Alpine comparée à d'autres investissements automobiles premium</span></li>
+                                <li><span>Développer une série 'Automobile Grade Investissement' mettant en vedette des investisseurs immobiliers à succès qui choisissent Alpine comme leur investissement véhicule préféré</span></li>
+                                <li><span>Lancer des ateliers de planification financière qui positionnent la possession Alpine comme partie d'une stratégie de portefeuille d'investissement sophistiquée</span></li>
+                                <li><span>Fournir des calculateurs transparents de coût total de possession et projections de valeur de revente pour soutenir une prise de décision éclairée</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="section">
+                            <h3>Impact & Objectif :</h3>
+                            <p>Attire des clients financièrement sophistiqués qui voient la possession Alpine comme une décision d'investissement stratégique, résultant en une valeur vie client plus élevée et un fort bouche-à-oreille dans les réseaux professionnels aisés.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 5 -->
+                <div class="slide">
+                    <div class="campaign-card">
+                        <div class="campaign-header">
+                            <div class="campaign-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                                </svg>
+                            </div>
+                            <h2 class="campaign-title">Showcase Innovation Gadgets</h2>
+                        </div>
+
+                        <div class="section">
+                            <h3>Pourquoi ?</h3>
+                            <p>Les Accros aux Gadgets montrent un intérêt intense pour la technologie automobile et des marques comme Porsche et Mercedes-Benz, tout en s'identifiant comme Stabilisateurs du Quotidien qui valorisent les solutions fiables et bien conçues. Cette combinaison crée une demande pour une technologie automobile sophistiquée qui améliore les expériences de conduite quotidiennes via une innovation fiable.</p>
+                        </div>
+
+                        <div class="section">
+                            <h3>Contenu Inspirant :</h3>
+                            <ul class="content-list">
+                                <li><span>Lancer une campagne 'Innovation Quotidienne' présentant comment les fonctionnalités avancées d'Alpine s'intègrent parfaitement dans les routines de conduite quotidiennes</span></li>
+                                <li><span>Créer des analyses technologiques détaillées mettant en vedette les systèmes sophistiqués d'Alpine via du contenu engageant, axé gadgets</span></li>
+                                <li><span>Développer des expériences showroom interactives où les clients peuvent explorer chaque fonctionnalité technologique via des démonstrations pratiques</span></li>
+                                <li><span>Partenariat avec des revieweurs technologie pour fournir une analyse approfondie des fonctionnalités innovantes d'Alpine et leurs bénéfices pratiques</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="section">
+                            <h3>Impact & Objectif :</h3>
+                            <p>Établit Alpine comme le choix pour les enthousiastes technologie qui exigent des fonctionnalités de pointe délivrées via une utilisabilité quotidienne fiable, favorisant la considération parmi les early adopters aisés qui influencent les tendances de marché plus larges.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <button class="nav-button prev" onclick="prevSlide()">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="15,18 9,12 15,6"></polyline>
+                </svg>
+            </button>
+            <button class="nav-button next" onclick="nextSlide()">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="9,18 15,12 9,6"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Slide Indicators -->
+        <div class="indicators">
+            <button class="indicator active" onclick="goToSlide(0)"></button>
+            <button class="indicator" onclick="goToSlide(1)"></button>
+            <button class="indicator" onclick="goToSlide(2)"></button>
+            <button class="indicator" onclick="goToSlide(3)"></button>
+            <button class="indicator" onclick="goToSlide(4)"></button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p id="footerText">Campagne 1 sur 5 • Insights Stratégiques pour Alpine Europe</p>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 5;
+        const slidesContainer = document.getElementById('slidesContainer');
+        const indicators = document.querySelectorAll('.indicator');
+        const footerText = document.getElementById('footerText');
+
+        function updateSlide() {
+            const translateX = -currentSlide * 100;
+            slidesContainer.style.transform = `translateX(${translateX}%)`;
+            
+            // Update indicators
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+            
+            // Update footer text
+            footerText.textContent = `Campagne ${currentSlide + 1} sur ${totalSlides} • Insights Stratégiques pour Alpine Europe`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlide();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlide();
+        }
+
+        // Auto-advance slides (optional)
+        // setInterval(nextSlide, 10000);
+
+        // Touch/swipe support for mobile
+        let startX = 0;
+        let endX = 0;
+
+        slidesContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        slidesContainer.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const threshold = 50;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+    </script>
+</body>
+</html>
